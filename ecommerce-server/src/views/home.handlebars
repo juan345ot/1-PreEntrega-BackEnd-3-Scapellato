@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Página de productos del servidor Ecommerce. Compra tus productos favoritos aquí.">
+  <title>Productos - Ecommerce Server</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Lista de Productos</h1>
+  </header>
+
+  <main>
+    <section id="products-section">
+      <h2>Productos Disponibles</h2>
+      <ul class="product-list">
+        {{#each products}}
+          <li>
+            <a href="/products/{{this._id}}" aria-label="Ver detalles del producto {{this.title}}">Ver Detalles</a>
+            <span class="product-info">- {{this.title}} - ${{this.price}}</span>
+            <label for="quantity-{{this._id}}">Cantidad:</label>
+            <input type="number" id="quantity-{{this._id}}" name="quantity" min="1" value="1" data-product-id="{{this._id}}">
+            <button class="add-to-cart" data-product-id="{{this._id}}">Agregar al Carrito</button>
+          </li>
+        {{/each}}
+      </ul>
+    </section>
+
+    <nav class="pagination">
+      {{#if hasPrevPage}}
+        <a href="{{prevLink}}" class="pagination-button">Anterior</a>
+      {{/if}}
+
+      {{#each (range 1 totalPages currentPage)}}
+        <a href="?limit={{../limit}}&page={{this}}&sort={{../sort}}&query={{../query}}" class="pagination-button {{#ifEquals this ../currentPage}}active{{/ifEquals}}">{{this}}</a>
+      {{/each}}
+
+      {{#if hasNextPage}}
+        <a href="{{nextLink}}" class="pagination-button">Siguiente</a>
+      {{/if}}
+
+      {{#if (gt totalPages 1)}}
+        <span>Página {{currentPage}} de {{totalPages}}</span>
+      {{/if}}
+    </nav>
+
+    <div id="cart-link-container"></div> <!-- Aquí se muestra el enlace al carrito -->
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Ecommerce Server. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="/js/home.js"></script>
+</body>
+</html>

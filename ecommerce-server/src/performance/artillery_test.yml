@@ -1,0 +1,14 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 60
+      arrivalRate: 20
+scenarios:
+  - flow:
+      - get:
+          url: "/api/mocks/mockingusers"
+      - post:
+          url: "/api/mocks/generateData"
+          json:
+            users: 50
+            pets: 50

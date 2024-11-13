@@ -1,0 +1,42 @@
+<!DOCTYPE html> 
+<html lang="es"> 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Detalles del producto {{product.title}} en nuestra tienda de ecommerce.">
+  <title>{{product.title}} - Detalles del Producto</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Detalles del Producto</h1>
+  </header>
+
+  <main>
+    <section id="product-details">
+      <h2>{{product.title}}</h2>
+      <p><strong>Descripción:</strong> {{product.description}}</p>
+      <p><strong>Código:</strong> {{product.code}}</p>
+      <p><strong>Precio:</strong> ${{product.price}}</p>
+      <p><strong>Estado:</strong> {{#if product.status}}Disponible{{else}}No disponible{{/if}}</p>
+      <p><strong>Stock:</strong> {{product.stock}}</p>
+      <p><strong>Categoría:</strong> {{product.category}}</p>
+
+      <label for="quantity">Cantidad:</label>
+      <input type="number" id="quantity" name="quantity" min="1" value="1" aria-label="Seleccionar cantidad para agregar al carrito">
+
+      <button class="add-to-cart" data-product-id="{{product._id}}">Agregar al Carrito</button>
+    </section>
+
+    <div id="cart-link-container"></div>
+
+    <a href="/?limit={{limit}}&page={{currentPage}}&sort={{sort}}&query={{query}}" class="back-to-home">Volver al Home</a>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Ecommerce Server. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="/js/product.js"></script>
+</body>
+</html>
